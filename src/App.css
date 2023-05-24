@@ -1,38 +1,368 @@
-.App {
+
+@font-face{
+  font-family: 'Roboto';
+  src: url('./fonts/Roboto-Medium.ttf') format('woff2'),
+       url('./fonts/Roboto-Medium.ttf') format('woff'),
+       url('./fonts/Roboto-Medium.ttf') format('truetype');
+}
+
+/* Page body CSS */
+.registration-page-body{
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 1080px;
+  /* UI Properties */
+  background: #f5f3f3 0% 0% no-repeat padding-box;
+  opacity: 1;
+  margin-top: 20px;
+  margin-bottom: 20px;
+    
+}
+
+
+/* Page Header CSS */
+.header{
+  margin-top: 10px;
+  left: 0px;
+  width: 100%;
+  height: 69px;
+  /* UI Properties */
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  opacity: 1;
+  
+}
+.header-container{
+  display: flex;
+  flex-direction: row;
+  border: 0px solid green;
+  /* border: 2px solid black; */
+}
+.logo{
+  display: flex;
+  flex-direction: row;
+  margin: -6px 10px 10px 145px;
+  top: 32px;
+  left: 188px;
+  width: 178px;
+  height: 45px;
+/* UI Properties */
+  opacity: 1;
+}
+
+.logo-img{
+  border: solid 0px #42515f;
+}
+
+.logo-content{
+  font: normal normal bold 20px/25px;
+  font-family: Roboto, sans-serif;
+  letter-spacing: 0px;
+  color: #82a70c;
+  text-transform: uppercase;
+  font-weight: bolder;
+}
+
+.logo-payroll{
+  color: #42515f;
+}
+
+.logo-name{
+  top: 32px;
+  left: 246px;
+  width: 127px;
+  height: 45px;
+  text-align: left;
+  font: normal normal bold 18px/20px Montserrat;
+  letter-spacing: 0px;
+  text-transform: capitalize;
+  opacity: 1;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Page Registration CSS */
+.form-content{
+  padding: 1%;
+  /* width:1200px; */
+  min-height: calc(100% - 80px);
+  background-color: #f7f7f7;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  border: 0px solid green;
+  /* margin-left: 100px; */
+  
+}
+
+input[type=radio] {
+  -ms-transform: scale(1.5); 
+  -webkit-transform: scale(1.5); 
+  transform: scale(1.2);
+  /* background-color: #42515F; */
+}
+
+.form{
+  top: 133px;
+  left: 397px;
+  width: 1126px;
+  height: 911px;
+  /* UI Properties */
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px #00000029;
+  border: 1px solid #F5F5F5;
+  border-radius: 8px;
+  opacity: 1;
+  padding: 44px 60px;
+  box-shadow: 0 4px 8px 0 rgba(68, 68, 68, 0.2), 0 6px 20px 0 rgba(140, 140, 140, 0.19);
+}
+
+.form-head{
+  /* font: normal normal bold 24px/37px Roboto;
+  letter-spacing: 0px;
+  color: #42515f;
+  text-transform: capitalize;
+  opacity: 1;
+  padding-bottom: 20px;
+  font-weight: bold; */
+  top: 175px;
+left: 546px;
+width: 290px;
+height: 37px;
+/* UI Properties */
+text-align: left;
+font: normal normal bold 28px/37px Roboto;
+letter-spacing: 0px;
+color: #42515F;
+text-transform: capitalize;
+opacity: 1;
+margin:0px 10px 0px 60px;
+}
+
+.form-body{
+  /* margin-top: 30px; */
+  /* margin:30px 10px 60px 60px; */
+  padding:30px 60px 60px 60px ;
+}
+
+.row-content{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+  align-items: center;
+  border: 0px solid green;
+  padding: 9px;
+}
+
+.label{
+  min-width: 140px;
+}
+
+label{
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+ 
+}
+.label{
+ 
+}
+
+.text{
+  
+  color: #42515f;
+  opacity: 1;
+/* UI Properties */
+text-align: left;
+letter-spacing: 0px;
+color: #42515F;
+opacity: 1;
+/* color: red;  */
+  font: normal normal normal 18px/25px Roboto;
+}
+
+.input{
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  /* background: #DEDEDE 0% 0% no-repeat padding-box; */
+}
+input[type="radio"]{
+  transform: scale(1.3);
+  margin-right: 12px;
+  /* color:#82a70c; */
+  /* background: #452f2f 0% 0% no-repeat padding-box; */
+}
+input[type="checkbox"]{
+  transform: scale(1.3);
+  margin-right: 12px;
+  /* color:#82a70c; */
+}
+.profile{
+  background: #DEDEDE 0% 0% no-repeat padding-box;
+  /* transform: translateY(-50%); */
+}
+
+.profile-radio-content{
+  display: flex;
+  flex-direction: row;
+}
+
+.profile-radio-content > label{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.profile{
+  width: 60px;
+  border-radius: 50%;
+  margin-left: 0px;
+  background-color: #82a70c;
+  /* margin-right: 12px; */
+}
+
+select{
+   padding: 12px;
+  /* border: 1px solid #ccc; */
+  /* border-radius: 4px; */
+  resize: vertical;
+  font: normal normal normal 16px Roboto;
+  letter-spacing: 0px;
+  color: #42515f;
+  background-color: transparent;
+  margin-right: 12px;
+  top: 681px;
+left: 688px;
+width: 163px;
+height: 50px;
+/* UI Properties */
+background: #FFFFFF 0% 0% no-repeat padding-box;
+border: 1px solid #BDBDBD;
+border-radius: 3px;
+opacity: 1;
+}
+
+.Salary-option{
+  top: 585px;
+  left: 688px;
+  width: 341px;
+  height: 50px;
+  /* UI Properties */
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  border: 1px solid #BDBDBD;
+  border-radius: 3px;
+  opacity: 1;
+
+}
+
+.notes{
+  /* Layout Properties */
+top: 777px;
+left: 800px;
+width: 750px;
+height: 104px;
+/* UI Properties */
+background: #FFFFFF 0% 0% no-repeat padding-box;
+border: 1px solid #BDBDBD;
+border-radius: 3px;
+opacity: 1;
+}
+
+.buttonParent{
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: space-between;
+  margin-top: 20PX;
+}
+
+.button{
+  /* font-size: 20px;
+  font-family: Roboto; */
+  letter-spacing: 0px;
+  /* color: #424242; */
+  opacity: 1;
+  background: transparent;
+  /* text-align: left; */
+  font: normal normal normal 20px/26px Roboto;
+  letter-spacing: 0px;
+  color: #42515F;
+  /* opacity: 1; */
+  /* Layout Properties */
+
+width: 180px;
+height: 53px;
+/* UI Properties */
+background: #E2E2E2 0% 0% no-repeat padding-box;
+border: 1px solid #969696;
+border-radius: 5px;
+opacity: 1;
+}
+
+.submitButton{
+  background-color: #E2E2E2;
+  margin-right: 30px;
+}
+
+.cancelButton{
+  text-decoration: none;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.button:hover{
+  -webkit-text-fill-color: #ffffff;
+  background-color: #707070;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.submitButton:hover{
+  background-color: #82A70C;
+}
+
+input[type="radio"] {
+
+  border-color: red;
+  
+  
+  background-color: red;
+  
+  
+  color: red;
+}
+@media only screen and (max-width: 960px){
+
+  .cancelButton{
+      margin-left: 0px;
+  }
+  .form{
+      width: 85%;
+      padding: 44px 20px;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
+@media only screen and (max-width: 600px){
+.form{
+  margin-top: 10px;
+}
+.row{
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+.uploadButton{
+  justify-content: flex-start;
+}
+.profile-radio-button{
+  flex-flow: wrap;
+}
+.submitButton{
+  margin: 0;
+}
+.buttonParent{
+  flex-direction: column-reverse;
+  align-items: flex-start;
+}
 }
 
-.App-link {
-  color: #61dafb;
-}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+
