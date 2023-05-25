@@ -6,19 +6,19 @@ import AddLogo from '../Assets/icons/add-24px.svg';
 // import RegistrationFrom from './RegistrationForm';
 import {Link} from 'react-router-dom';
 
-export default function Dashboard(){
+function Dashboard(){
     return(
         <>
              <div class="main-content">
         <div class="header-content">
             <div class="emp-detail-text">Employee Details
             </div>
-            <Link className='a' to="/registration-form"> 
+            <Link className='a' to="/registration-form" style={{ textDecoration: 'none' }}> 
                 <button className="addUser">
                     <div className="addUser-img"><img src={AddLogo} className="addUser-img" alt=""/></div>
                     <div className="addUser-text">Add User</div>
-                    </button>
-                    </Link>
+                </button>
+            </Link>
         </div>
         <div class="table-main">
             <table id="display" class="table">
@@ -53,3 +53,4 @@ export default function Dashboard(){
         </>
     );
 }
+export default Dashboard;

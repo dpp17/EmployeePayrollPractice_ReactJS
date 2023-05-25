@@ -1,33 +1,87 @@
-
 import '../App.css';
-
-import Dashboard from './Dashboard';
 import React, { useState } from 'react';
 
 import ImageOne from '../Assets/profile-images/imgOne.png';
 import ImageTwo from '../Assets/profile-images/imgTwo.png';
 import ImageThree from '../Assets/profile-images/imgThree.png';
 import ImageFour from '../Assets/profile-images/imgFour.png';
-import {Routes, Route, Link, BrowserRouter} from 'react-router-dom';
+
 
 
 function RegistrationForm() {
-    const [isOpen, setIsOpen] = useState(false);
+    
+        let initialValues = {
+            name:'',
+            department:["HR","Sales","Finance","Engineer","Others"],
+            departmentValue:[],
+            day:'',
+            month:'',
+            year:'',
+            salary:'',
+            gender:'',
+            profilePic:'',
+            startDate:'',
+            notes:'',
+        };
+   
 
-    const handleButtonClick = () => {
-      setIsOpen(true);
+    const [formValue, setValue] = useState(initialValues);
+    
+    let onChangeFormValue = (event) => {
+        console.log(event.target.name);
+        setValue({...formValue, [event.target.name]: event.target.value });  
     };
-  return (
+
+    ////////////////////////////////////// Force_Submit To Stay On The Same Page ////////////////////////////////
+    let handleAutoSubmit = (event)=>{
+        event.preventDefault();
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+    
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////******************************//////////////////////////////////
+    //////////////////////////////////         onSubmit             //////////////////////////////////
+    //////////////////////////////////******************************//////////////////////////////////
+   
+    let onSubmit = () =>{
+        let object = {
+            Name: formValue.name,
+            Start_Date: `${formValue.day} ${formValue.month} ${formValue.year}`,
+            Salary: formValue.salary,
+            Notes: formValue.notes,
+            Gender: formValue.gender,
+            Department: formValue.departmentValue,
+        }
+        console.log(formValue);
+        console.log(object);
+    };
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //////////////////////////////// On Changing Department Name ////////////////////////////////
+    let onDepartmentChange = (event) => {
+        let departmentName =  event.target.value;
+        let index = formValue.departmentValue.indexOf(departmentName);
+        let checkArray = [ ...formValue.departmentValue];
+        if(index > -1) {checkArray.splice(index,1);}
+        else {checkArray.push(departmentName);}
+        setValue({ ...formValue, departmentValue: checkArray});
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+return(
     <>
      <div className="form-content">
-        <form action="" className="form">
+        <form action="" className="form" onSubmit={handleAutoSubmit}>
             <div className="form-head">
                 Employee Payroll Form
             </div>
             <div className="form-body">
             <div className="row-content">
             <label class="label text" for="name">Name</label>
-                        <input class="input" type="text" id="name" name="name" required />
+                        <input class="input" type="text" id="name" name="name" onChange={onChangeFormValue} required />
                         <error-output class="text-error" for="text"></error-output>
             </div>
             <div className="row-content">
@@ -35,68 +89,63 @@ function RegistrationForm() {
                     <div class="profile-radio-content">
                         <label>
                             <input type="radio" className="profile" name="profile"
-                            value={ImageOne} required />
+                            value={ImageOne}  onChange={onChangeFormValue} required />
                             <img class="profile-image" className="image" src={ImageOne} alt="profile-img not found" />
                         </label>
                         <label>
                             <input type="radio" className="profile" name="profile"
-                            value={ImageTwo} required />
+                            value={ImageTwo} onChange={onChangeFormValue} required />
                             <img class="profile-image" className="image" src={ImageTwo} alt="profile-img not found" />
                         </label>
                         <label>
                             <input type="radio" className="profile" name="profile"
-                            value={ImageThree} required />
+                            value={ImageThree} onChange={onChangeFormValue} required />
                             <img class="profile-image" className="image" src={ImageThree} alt="profile-img not found" />
                         </label>
                         <label>
                             <input type="radio" className="profile" name="profile"
-                            value={ImageFour} required />
+                            value={ImageFour} onChange={onChangeFormValue} required />
                             <img class="profile-image" className="image" src={ImageFour} alt="profile-img not found" />
                         </label>
-                        {/* <label htmlFor=""></label> */}
                     </div>
             </div>
             <div className="row-content">
             <label class="label text" for="gender">Gender</label>
                     <div>
-                        <input type="radio" id="male" name="gender" value="male"/>
+                        <input type="radio" id="male" name="gender" onChange={onChangeFormValue} value="male"/>
                         <label class="text" for="male">Male</label>
 
-                        <input type="radio" id="female" name="gender" value="female"/>
+                        <input type="radio" id="female" name="gender" onChange={onChangeFormValue}  value="female"/>
                         <label class="text" for="female">Female</label>
                         
-                        <input type="radio" id="other" name="gender" value="other"/>
+                        <input type="radio" id="other" name="gender" onChange={onChangeFormValue}  value="other"/>
                         <label class="text" for="other">Other</label>
                     </div>
             </div>
-            {/* <div class="row-content">
-                    <label class="label text" for="email">Email ID</label>
-                        <input class="input" type="email" id="email" name="email" placeholder="abc123@gmail.com" required/>
-                </div> */}
                 <div class="row-content">
                     <label class="label text" for="department">Department</label>
                     <div>
                         {/* <input class="checkbox" type="checkbox" id="hr" name="hr" value="HR"/> */}
-                        <input class="checkbox" type="checkbox" id="hr" name="department" value="HR"/>
+                        <input class="checkbox" type="checkbox" id="hr" name="department" onChange={onDepartmentChange}  value="HR"/>
                         <label class="text" for="hr">HR</label>
                         {/* <input class="checkbox" type="checkbox" id="sales" name="sales" value="Sales"/> */}
-                        <input class="checkbox" type="checkbox" id="sales" name="department" value="Sales"/>
+                        <input class="checkbox" type="checkbox" id="sales" name="department" onChange={onDepartmentChange}  value="Sales"/>
                         <label class="text" for="sales">Sales</label>
                         {/* <input class="checkbox" type="checkbox" id="finance" name="finance" value="Finance"/> */}
-                        <input class="checkbox" type="checkbox" id="finance" name="department" value="Finance"/>
+                        <input class="checkbox" type="checkbox" id="finance" name="department" onChange={onDepartmentChange}  value="Finance"/>
                         <label class="text" for="finance">Finance</label>
                         {/* <input class="checkbox" type="checkbox" id="engineer" name="engineer" value="Engineer"/> */}
-                        <input class="checkbox" type="checkbox" id="engineer" name="department" value="Engineer"/>
+                        <input class="checkbox" type="checkbox" id="engineer" name="department" onChange={onDepartmentChange} value="Engineer"/>
                         <label class="text" for="engineer">Engineer</label>
                         {/* <input class="checkbox" type="checkbox" id="others" name="others" value="Others"/> */}
-                        <input class="checkbox" type="checkbox" id="others" name="department" value="Others"/>
+                        <input class="checkbox" type="checkbox" id="others" name="department" onChange={onDepartmentChange} value="Others"/>
                         <label class="text" for="others">Others</label>
                     </div>
                 </div>
                 <div class="row-content">
                     <label class="label text" for="salary">Salary</label>
                     <div>
-                        <select name="Salary" class="Salary-option">
+                        <select name="salary" class="Salary-option"  onChange={onChangeFormValue} >
                         <option class="Salary-option" value="" disabled selected hidden>Select Salary</option>
                             <option value="<100000" class="Salary-option">&lt;100000</option>
                             <option value="200000" >200000</option>
@@ -134,9 +183,9 @@ function RegistrationForm() {
                    
                 </div>
                 <div class="row-content">
-                    <label class="label text" for="startDate">Start Date</label>
+                    <label class="label text" for="startDate" onChange={onChangeFormValue}>Start Date</label>
                     <div>
-                        <select name="Day" id="day">
+                        <select name="day" id="day"  onChange={onChangeFormValue} >
                         <option value="" disabled selected hidden>Day</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -171,7 +220,7 @@ function RegistrationForm() {
                             <option value="31">31</option>
                             
                         </select>
-                        <select name="Month" id="month">
+                        <select name="month" id="month" onChange={onChangeFormValue}>
                         <option value="" disabled selected hidden>Month</option>
                             <option value="Jan">January</option>
                             <option value="Feb">February</option>
@@ -186,7 +235,7 @@ function RegistrationForm() {
                             <option value="Nov">November</option>
                             <option value="Dec">December</option>
                         </select>
-                        <select name="Year" id="year">
+                        <select name="year" id="year" onChange={onChangeFormValue}>
                         <option value="" disabled selected hidden>Year</option>
                             <option value="2022">2022</option>
                             <option value="2021">2021</option>
@@ -200,20 +249,16 @@ function RegistrationForm() {
                 </div>
                 <div class="row-content">
                     <label class="label text" for="notes">Notes</label>
-                    <inout type="text" class="input" name="Notes" className="notes" placeholder=""></inout>
+                    <input type="text" class="input" name="notes" className="notes" onChange={onChangeFormValue} placeholder=""></input>
                 </div>
                 <div class="buttonParent">
-                
-             
-             {/* <Link className='a' to="/about">About</Link>
-             <Link className='a' to="/contact">Contact</Link> */}
         
                     {/* <a href="./Employee.html" target="_self" class="resetButton button cancelButton">Cancel</a> */}
                     <div class="cancel"> <button type="cancel" class="cancelButton button">Cancel</button></div>
                     <div class="submit-reset"><nav>
-                    {/* <button type="submit" class="submitButton button" id="submitButton"><Link className='a' to="/dashboard">Submit</Link></button> */}
-                    <Link className='a' to="/dashboard"> <button type="submit" class="submitButton button" id="submitButton" onClickSubmit={handleButtonClick}>Submit</button></Link>
-                    {isOpen && <Dashboard />}
+                    {/* <Link className='a' to="/dashboard"> <button type="submit" class="submitButton button" id="submitButton" >Submit</button></Link> */}
+                    {/* {isOpen && <Dashboard />} */}
+                    <button type="submit" class="submitButton button" id="submitButton"  onClick={onSubmit}>Submit</button>
                         <button type="reset" class="resetButton button">Reset</button>
                         </nav>
                     </div>
@@ -221,9 +266,6 @@ function RegistrationForm() {
                 </div>
         </form>
      </div>
-     {/* <Routes>
-     <Route path="/dashboard" element={<Dashboard />} />
-            </Routes> */}
    </>
   );
 }

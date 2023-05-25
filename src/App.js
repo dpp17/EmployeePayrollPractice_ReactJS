@@ -1,4 +1,3 @@
-import logo from './Assets/images/logo.png';
 import './App.css';
 import PageHeader from "./component/PageHeader";
 import RegistrationForm from "./component/RegistrationForm";
@@ -10,9 +9,9 @@ function App() {
   <div className="registration-page-body">
       <PageHeader/>
       <Routes>
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/" element={<RegistrationForm />} />
+        <Route path="/" element={<Dashboard />} />
         <Route path="/registration-form" element={<RegistrationForm />} />
+        {/* <Route path="/registration-form" element={<RegistrationForm />} /> */}
       </Routes>
       </div>
   );

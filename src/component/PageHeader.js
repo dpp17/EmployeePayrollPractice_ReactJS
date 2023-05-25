@@ -1,8 +1,10 @@
 import '../App.css';
 import logo from '../Assets/images/logo.png';
+import {Link} from 'react-router-dom';
 
-export default function PageHeader() {
+function PageHeader() {
   return (
+    <Link className='a' to="/" style={{ textDecoration: 'none' }}> 
       <div className="header-container header">
         <div className="logo">
                 <img src={logo} className="logo-image" alt="EMployee-Payroll_Logo" />
@@ -12,5 +14,7 @@ export default function PageHeader() {
             </div>
         </div>
     </div>
+    </Link>
   );
 }
+export default PageHeader;
