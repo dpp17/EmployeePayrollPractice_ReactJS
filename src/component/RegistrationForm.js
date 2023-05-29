@@ -1,5 +1,6 @@
 import '../App.css';
 import React, { useState } from 'react';
+import EmployeeService from '../Service/EmployeePayrollServices';
 
 import ImageOne from '../Assets/profile-images/imgOne.png';
 import ImageTwo from '../Assets/profile-images/imgTwo.png';
@@ -12,6 +13,12 @@ function RegistrationForm() {
     
         let initialValues = {
             name:'',
+            // profileArray:[
+            //     {url:"../Assets/profile-images/imgOne.png"},
+            //     {url:"../Assets/profile-images/imgTwo.png"},
+            //     {url:"../Assets/profile-images/imgThree.png"},
+            //     {url:"../Assets/profile-images/imgFour.png"},
+            // ],
             department:["HR","Sales","Finance","Engineer","Others"],
             departmentValue:[],
             day:'',
@@ -19,7 +26,7 @@ function RegistrationForm() {
             year:'',
             salary:'',
             gender:'',
-            profilePic:'',
+            profile:'',
             startDate:'',
             notes:'',
         };
@@ -46,17 +53,35 @@ function RegistrationForm() {
     //////////////////////////////////         onSubmit             //////////////////////////////////
     //////////////////////////////////******************************//////////////////////////////////
    
-    let onSubmit = () =>{
+    let save = () =>{
         let object = {
-            Name: formValue.name,
-            Start_Date: `${formValue.day} ${formValue.month} ${formValue.year}`,
-            Salary: formValue.salary,
-            Notes: formValue.notes,
-            Gender: formValue.gender,
-            Department: formValue.departmentValue,
+            name: formValue.name,
+            startDate: `${formValue.day} ${formValue.month} ${formValue.year}`,
+            salary: formValue.salary,
+            note: formValue.notes,
+            gender: formValue.gender,
+            departments: formValue.departmentValue,
+            profilePic:formValue.profile,
         }
         console.log(formValue);
         console.log(object);
+
+        EmployeeService.addEmployee(object)
+            .then((response) => {
+                console.log(response);
+                alert("Data Added successfully..");
+        })
+            .catch((error) => {
+                console.log(error);
+        });
+    };
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////******************************//////////////////////////////////
+    //////////////////////////////////         Reset             //////////////////////////////////
+    //////////////////////////////////******************************//////////////////////////////////
+    let reset = (event) => {
+        console.log(event.target.name);
+            setValue({...formValue, [event.target.name]:initialValues });
     };
     /////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -89,22 +114,22 @@ return(
                     <div class="profile-radio-content">
                         <label>
                             <input type="radio" className="profile" name="profile"
-                            value={ImageOne}  onChange={onChangeFormValue} required />
+                            value="../Assets/profile-images/imgOne.png" checked={formValue.profile === "../Assets/profile-images/imgOne.png"}  onChange={onChangeFormValue} required />
                             <img class="profile-image" className="image" src={ImageOne} alt="profile-img not found" />
                         </label>
                         <label>
                             <input type="radio" className="profile" name="profile"
-                            value={ImageTwo} onChange={onChangeFormValue} required />
+                             value="../Assets/profile-images/imgTwo.png" checked={formValue.profile === "../Assets/profile-images/imgTwo.png"} onChange={onChangeFormValue} required />
                             <img class="profile-image" className="image" src={ImageTwo} alt="profile-img not found" />
                         </label>
                         <label>
                             <input type="radio" className="profile" name="profile"
-                            value={ImageThree} onChange={onChangeFormValue} required />
+                             value="../Assets/profile-images/imgThree.png" checked={formValue.profile === "../Assets/profile-images/imgThree.png"} onChange={onChangeFormValue} required />
                             <img class="profile-image" className="image" src={ImageThree} alt="profile-img not found" />
                         </label>
                         <label>
                             <input type="radio" className="profile" name="profile"
-                            value={ImageFour} onChange={onChangeFormValue} required />
+                             value="../Assets/profile-images/imgFour.png" checked={formValue.profile === "../Assets/profile-images/imgFour.png"} onChange={onChangeFormValue} required />
                             <img class="profile-image" className="image" src={ImageFour} alt="profile-img not found" />
                         </label>
                     </div>
@@ -112,13 +137,13 @@ return(
             <div className="row-content">
             <label class="label text" for="gender">Gender</label>
                     <div>
-                        <input type="radio" id="male" name="gender" onChange={onChangeFormValue} value="male"/>
+                        <input type="radio" id="male" name="gender" onChange={onChangeFormValue} value="male" />
                         <label class="text" for="male">Male</label>
 
-                        <input type="radio" id="female" name="gender" onChange={onChangeFormValue}  value="female"/>
+                        <input type="radio" id="female" name="gender" onChange={onChangeFormValue}  value="female" />
                         <label class="text" for="female">Female</label>
                         
-                        <input type="radio" id="other" name="gender" onChange={onChangeFormValue}  value="other"/>
+                        <input type="radio" id="other" name="gender" onChange={onChangeFormValue}  value="other"  />
                         <label class="text" for="other">Other</label>
                     </div>
             </div>
@@ -145,7 +170,7 @@ return(
                 <div class="row-content">
                     <label class="label text" for="salary">Salary</label>
                     <div>
-                        <select name="salary" class="Salary-option"  onChange={onChangeFormValue} >
+                        <select name="salary" class="Salary-option"  onChange={onChangeFormValue}>
                         <option class="Salary-option" value="" disabled selected hidden>Select Salary</option>
                             <option value="<100000" class="Salary-option">&lt;100000</option>
                             <option value="200000" >200000</option>
@@ -258,8 +283,8 @@ return(
                     <div class="submit-reset"><nav>
                     {/* <Link className='a' to="/dashboard"> <button type="submit" class="submitButton button" id="submitButton" >Submit</button></Link> */}
                     {/* {isOpen && <Dashboard />} */}
-                    <button type="submit" class="submitButton button" id="submitButton"  onClick={onSubmit}>Submit</button>
-                        <button type="reset" class="resetButton button">Reset</button>
+                    <button type="submit" class="submitButton button" id="submitButton"  onClick={save}>Submit</button>
+                        <button type="reset" class="resetButton button" onReset={reset}>Reset</button>
                         </nav>
                     </div>
                 </div>
