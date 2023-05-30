@@ -65,7 +65,7 @@ function RegistrationForm() {
         }
         console.log(formValue);
         console.log(object);
-
+        
         EmployeeService.addEmployee(object)
             .then((response) => {
                 console.log(response);
