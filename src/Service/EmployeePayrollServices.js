@@ -15,8 +15,11 @@ class EmployeePayrollServices{
         return axios.delete(`${this.baseUrl}/deleteEmp/${id}`);
     }
 
-    updateEmployee(id){
-        return axios.put(`${this.baseUrl}/editEmp/${id}`);
+    updateEmployee(id, data){
+        return axios.put(`${this.baseUrl}/editEmp/${id}`,data);
+    }
+    getEmployeeById(id){
+        return axios.get(`${this.baseUrl}/getEmp/${id}`);
     }
 }
 

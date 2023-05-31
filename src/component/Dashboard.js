@@ -5,15 +5,16 @@ import Create from '../Assets/icons/create-black-18dp.svg';
 import AddLogo from '../Assets/icons/add-24px.svg';
 import Services from '../Service/EmployeePayrollServices';
 // import RegistrationFrom from './RegistrationForm';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import profile1 from '../Assets/profile-images/imgOne.png';
 import profile2 from '../Assets/profile-images/imgTwo.png';
 import profile3 from '../Assets/profile-images/imgThree.png';
 import profile4 from '../Assets/profile-images/imgFour.png';
+import ReagistrationForm from './RegistrationForm';
 
 function Dashboard(){
-    
+    const navigate = useNavigate();
     let initialValue = {
         // allEmployees:[],
         employeeArray:[],
@@ -39,15 +40,10 @@ function Dashboard(){
 
             ///////////////////////////////////////////////////
 
-            
-    // const params = useParams(); 
-
-    // console.log(props.employeeArray);
-
     let deleteEmp = (id) => { 
         var answer = window.confirm("Data once deleted cant be retrived..");
     if(answer === true){
-        Services.deleteEmployee(id).then((data)=>{
+        Services.deleteEmployee(id).then(()=>{
             alert("Employee deleted successfully..!!");
             window.location.reload();
             displayEmployee();
@@ -59,10 +55,11 @@ function Dashboard(){
         alert("Employee not Deleted");
     }
     };
-    let updateEmp = (id) => {
-        const value = parseInt(id);
-        Services.deleteEmployee(value);
-    }
+    let updateEmp = (employeeId) => {
+        console.log(employeeId);
+        navigate(`/registration-form/${employeeId}`);
+        
+      };
             ///////////////////////////////////////////////////
 
     return(
@@ -117,7 +114,7 @@ function Dashboard(){
                 
                 <td>
                     <img src={Delete} alt="delete" id="1" onClick={()=>{deleteEmp(employee.emp_id)}}/>
-                    <img src={Create} alt="create" id="1" onClick={()=>{updateEmp(employee.emp_id)}}/>
+                     <img src={Create} alt="Update_Logo" id="1" onClick={()=>{updateEmp(employee.emp_id)}}/>
                 </td>
             </tr>
             

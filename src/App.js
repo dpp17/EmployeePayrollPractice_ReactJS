@@ -12,8 +12,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/registration-form" element={<RegistrationForm />} />
+        <Route path="/registration-form/:id" element={<RegistrationForm />} />
         {/* <Route path="/registration-form" element={<RegistrationForm />} /> */}
-        <Route path="/demo" element={<Demo/>}/>
+        {/* <Route path="/demo" element={<Demo/>}/> */}
       </Routes>
       
       </div>
