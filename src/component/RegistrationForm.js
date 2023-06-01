@@ -8,9 +8,7 @@ import ImageThree from '../Assets/profile-images/imgThree.png';
 import ImageFour from '../Assets/profile-images/imgFour.png';
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-
-
-
+  
 function RegistrationForm() {
     const navigate = useNavigate();
         let initialValues = {
@@ -69,19 +67,14 @@ function RegistrationForm() {
         console.log(formValue);
         console.log(object);
 
-        EmployeeService.addEmployee(object)
-            .then((response) => {
-                console.log(response);
-                alert("Data Added successfully..");
-        })
-            .catch((error) => {
-                console.log(error);
-        });
+      
         //////////////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////
         if(formValue.isUpdate){
             var ans = window.confirm("Confirm the Change That have been made..!!");
             if(ans === true){
+                console.log("updating...");
+                console.log(object);
                 EmployeeService.updateEmployee(params.id, object)
                 .then((data)=>{
                     console.log(data.data.data);
@@ -92,6 +85,15 @@ function RegistrationForm() {
                     console.log(error);
                 });
             }   
+        }else{
+            EmployeeService.addEmployee(object)
+            .then((response) => {
+                console.log(response);
+                alert("Data Added successfully..");
+        })
+            .catch((error) => {
+                console.log(error);
+        });
         }
 
     };
@@ -126,7 +128,11 @@ function RegistrationForm() {
     
     }
 
-    let getChecked
+    const getChecked = (name) => {
+        return (
+            formValue.departmentValue && formValue.departmentValue.includes(name)
+        );
+    };
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////
 
@@ -155,7 +161,7 @@ function RegistrationForm() {
     const setData = (obj) => {
         let array = obj.startDate;
         console.log(array);
-        console.log(obj);
+        console.log(obj.profilePic);
 
         setValue({
             ...formValue,
@@ -164,6 +170,7 @@ function RegistrationForm() {
             name:obj.name,
             departmentValue: obj.departments,
             isUpdate:true,
+            profile:obj.profilePic,
             day: array[0] + array[1],
             month: array[3] + array[4] + array[5],
             year: array[7] + array[8] + array[9] + array[10],
@@ -244,19 +251,19 @@ return(
                         })} */}
 
                     
-                        <input class="checkbox" type="checkbox" id="hr" name="department" onChange={onDepartmentChange}  value="HR" checked={formValue.department[0] === "HR"} />
+                        <input class="checkbox" type="checkbox" id="hr" name="department" onChange={onDepartmentChange}  value="HR"  checked={getChecked("HR")}  />
                         <label class="text" for="hr">HR</label>
                         
-                        <input class="checkbox" type="checkbox" id="sales" name="department" onChange={onDepartmentChange}  value="Sales" checked={formValue.department[1] === "Sales"} />
+                        <input class="checkbox" type="checkbox" id="sales" name="department" onChange={onDepartmentChange}  value="Sales" checked={getChecked("Sales")} />
                         <label class="text" for="sales">Sales</label>
                       
-                        <input class="checkbox" type="checkbox" id="finance" name="department" onChange={onDepartmentChange}  value="Finance" checked={formValue.department[2] === "Finance"} />
+                        <input class="checkbox" type="checkbox" id="finance" name="department" onChange={onDepartmentChange}  value="Finance" checked={getChecked("Finance")} />
                         <label class="text" for="finance">Finance</label>
                         
-                        <input class="checkbox" type="checkbox" id="engineer" name="department" onChange={onDepartmentChange} value="Engineer" checked={formValue.department[3] === "Engineer"} />
+                        <input class="checkbox" type="checkbox" id="engineer" name="department" onChange={onDepartmentChange} value="Engineer" checked={getChecked("Engineer")} />
                         <label class="text" for="engineer">Engineer</label>
                        
-                        <input class="checkbox" type="checkbox" id="others" name="department" onChange={onDepartmentChange} value="Others" checked={formValue.department[4] === "Others"} />
+                        <input class="checkbox" type="checkbox" id="others" name="department" onChange={onDepartmentChange} value="Others" checked={getChecked("Others")} />
                         <label class="text" for="others">Others</label>
                     </div>
                 </div>
@@ -305,15 +312,15 @@ return(
                     <div>
                         <select name="day" id="day" value={formValue.day} onChange={onChangeFormValue} >
                         <option value="" disabled selected hidden>Day</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
+                            <option value="01">01</option>
+                            <option value="02">02</option>
+                            <option value="03">03</option>
+                            <option value="04">04</option>
+                            <option value="05">05</option>
+                            <option value="06">06</option>
+                            <option value="07">07</option>
+                            <option value="08">08</option>
+                            <option value="09">09</option>
                             <option value="10">10</option>
                             <option value="11">11</option>
                             <option value="12">12</option>

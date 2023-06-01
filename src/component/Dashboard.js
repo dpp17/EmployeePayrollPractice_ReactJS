@@ -45,7 +45,7 @@ function Dashboard(){
     if(answer === true){
         Services.deleteEmployee(id).then(()=>{
             alert("Employee deleted successfully..!!");
-            window.location.reload();
+            navigate("/");
             displayEmployee();
         })
         .catch((error)=>{
